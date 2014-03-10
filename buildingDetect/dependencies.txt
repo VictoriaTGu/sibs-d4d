@@ -1,0 +1,5 @@
+Python 2.7
+OpenCV 2.4.5 for Python (libopencv-deb on Ubuntu)
+pymeanshift 0.2.1
+numpy 1.7.1
+SimpleCV 1.3 (will likely be discontinued)

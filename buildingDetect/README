@@ -1,0 +1,3 @@
+Current progress: basic rectangle detection with OpenCV; tests with SimpleCV (to be discontinued); some preprocessing (bilateral filter) and segmentation (mean shift) tests on images from GMaps
+
+TODO: Vegetation/road detection & masking of satellite images; postprocessng
