@@ -1,8 +1,12 @@
 import cv2 as cv
 import numpy as np
 
-# load color image
-im = cv.imread('../images/chibombo1-seg.png')
+fname = '../images/chibombo3.png'
+fseg = fname[:-4] + '-seg.png'
+
+# load color image and segmentation
+orig = cv.imread(fname)
+im = cv.imread(fseg)
 xdim, ydim, nchannels = im.shape
 
 # morphological opening and closing
@@ -14,7 +18,7 @@ imcopy = im.copy()
 gray = cv.cvtColor(im, cv.COLOR_RGB2GRAY)
 #thresh = cv.adaptiveThreshold(gray, 255, cv.ADAPTIVE_THRESH_GAUSSIAN_C, cv.THRESH_BINARY, 11, 2)
 
-cv.imshow('image', gray)
+cv.imshow('image', orig)
 cv.waitKey(0)
 
 num_buildings = 0
@@ -29,7 +33,7 @@ for i in xrange(255):
   contours, hierarchy = cv.findContours(binary, mode=cv.RETR_LIST, method=cv.CHAIN_APPROX_SIMPLE)
 
   for c in contours:
-    poly = cv.approxPolyDP(np.array(c), 0.05*cv.arcLength(c,True), True)
+    poly = cv.approxPolyDP(np.array(c), 0.07*cv.arcLength(c,True), True)
     carea = cv.contourArea(c)
     polyarea = cv.contourArea(poly)
     hull = cv.convexHull(c)
@@ -42,7 +46,7 @@ for i in xrange(255):
 
     if polyarea < 2048 and carea < 2048:
       cv.drawContours(im, [c], 0, (0,0,255), 1)
-    if len(poly) < 10 and len(poly) > 3 and carea < 2048 and carea > 5 \
+    if len(poly) == 4 and carea < 2048 and carea > 5 \
         and abs(polyarea/carea - 1) < 0.25:
       num_buildings += 1
       cv.drawContours(imcopy, [poly], 0, (0,0,255), 1)
@@ -51,11 +55,12 @@ for i in xrange(255):
 cv.imshow('all bounding boxes', im)
 cv.waitKey(0)
 
-cv.imshow('rectangles only', imcopy)
+cv.imshow('with some filtering', imcopy)
 cv.waitKey(0)
 cv.destroyAllWindows()
 
-#cv.imwrite('../images/shapes-test.png', imcopy)
+fout = fname[:-4] + '-detect.png'
+cv.imwrite(fout, imcopy)
 
 print num_buildings
 
