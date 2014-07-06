@@ -1,8 +1,8 @@
 import cv2 as cv
 import numpy as np
 
-fname = '../images/chibombo3.png'
-fseg = fname[:-4] + '-seg.png'
+fname = '../images/chibombo1.png'
+fseg = fname[:-4] + '-veg-subtract2.png'
 
 # load color image and segmentation
 orig = cv.imread(fname)
@@ -17,6 +17,7 @@ im = cv.morphologyEx(im, cv.MORPH_CLOSE, kernel)
 imcopy = im.copy()
 gray = cv.cvtColor(im, cv.COLOR_RGB2GRAY)
 #thresh = cv.adaptiveThreshold(gray, 255, cv.ADAPTIVE_THRESH_GAUSSIAN_C, cv.THRESH_BINARY, 11, 2)
+WINDOW_NAME = "win"
 
 cv.imshow('image', orig)
 cv.waitKey(0)

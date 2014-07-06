@@ -12,6 +12,7 @@ def vegetationMask(im, xdim, ydim):
 
   colInvarIm = np.zeros(shape=(xdim, ydim))
 
+  # iterate over the image, 
   for i in xrange(xdim):
     for j in xrange(ydim):
       if (green[i,j] + blue[i,j]) < np.finfo(float).eps:
@@ -29,8 +30,8 @@ def vegetationMask(im, xdim, ydim):
 
   #cv.imshow('color invariant image', colInvarIm)
   #cv.waitKey(0)
-  #cv.imshow('vegetation', vegetation)
-  #cv.waitKey(0)
+  cv.imshow('vegetation', vegetation)
+  cv.waitKey(0)
   #cv.destroyAllWindows()
 
   cinvar_fname = fname[:-4] + '-col-invar.png'
