@@ -66,10 +66,11 @@ def main():
     		# if it's white in the eroded image, then it's vegetation
 			if opening2[i,j] == 255:
     			# set to black
-				img[i,j] = median_pixel
+				img[i,j] = (0,255,0)
 				
 
 	show_image(img, 'overlay')
+	cv.imwrite(fname[:-4] + '-veg-subtract.png', img)
 	img = invert_image(img)
 	#img = invert_image(img)
 	#cv.imwrite(fname[:-4] + '-veg-subtract2.png', img)
