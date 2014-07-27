@@ -1,9 +1,10 @@
 # Satellite Image-Based Sampling Project
-## The goal of this project is to detect buildings from satellite imagery of rural/semi-rural areas in Africa. Our current data source is taking screen shots from Google Maps, so the resolution is poor.
+The goal of this project is to detect buildings from satellite imagery of rural/semi-rural areas in Africa. Our current data source is taking screen shots from Google Maps, so the resolution is poor. However, we are looking into getting satellite imagery grants for research purposes.
 
 # Outline of workflow:
-Basic rectangle detection with OpenCV; tests with SimpleCV (to be discontinued); some preprocessing (bilateral filter) and segmentation (mean shift) tests on images from GMaps
-
+1. Download a single satellite image (currently by taking screen shots from Google Maps)
+2. Image Preprocessing: Bilateral Filter (blurs the image while keeping the edges sharp)
+3. 
 
 # Progress from 2014 spring semester:
 
@@ -18,4 +19,15 @@ Summary: We set up a simple workflow for image preprocessing (bilateral filter) 
 
 # Progress from summer 2014:
 
-* `segmentColor.py`: 
+* `replaceVegetation.py`: Turning vegetation pixels into background pixels
+1. Convert the image to grayscale.
+2. Threshold the image to produce a black and white image, where the black is vegetation (in our test images, vegetation is a much darker color than the buildings so will be picked up as foreground).
+3. Remove noise using erosion (so we're confident that what's left is indeed foreground).
+4. Go through the original image and replace the vegetation pixels with the mode pixel of the image (essentially turning vegetation into background).
+
+* `segmentColor.py`: Use color invariants to turn roads into background and turn the buildings black so they appear in the foreground.
+1. Plot a histogram of the RGB channels (after turning the vegetation into background, you see very distinct peaks in the histogram, making it easier to isolate the different elements)
+2. Threshold the pixels to segment into road and buildings (for the road, red value is greater than two standard deviations from its mean; for the houses, blue value is greater than one standard deviation from its mean)
+3. Turn the road pixels into background and building pixels into foreground.
+
+* `rectDetect.py`: Same as before except it allows for polygons with between 3-5 sides, and changed the minimum area threshold.
