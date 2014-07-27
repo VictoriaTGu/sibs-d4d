@@ -1,2 +1,2 @@
 collectimages/
-venv/
+*.pyc

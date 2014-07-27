@@ -21,5 +21,7 @@ def main():
 
 	detect = detectpolygon.detect(segmented, original, xdim, ydim)
 
+	# cv.imwrite(detect, '../images/summer2014/' + fname[:-4] + '-detect.png')
+
 if __name__ == "__main__":
 	main()

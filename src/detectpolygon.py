@@ -53,7 +53,9 @@ def detect(segmented, original, xdim, ydim):
   utils.show_image(img, 'all bounding boxes')
   utils.show_image(imgcopy, 'with some filtering')
   utils.show_image(original, 'onto original')
-
   print num_buildings
+  return original
+
+  
 
 

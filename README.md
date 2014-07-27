@@ -9,7 +9,7 @@ The goal of this project is to detect buildings from satellite imagery of rural/
 5. Perform rectangle detection for buildings
 6. Extract lat/lng coordinates of buildings (TODO)
 
-# Progress from 2014 spring semester:
+# Progress from 2014 Spring Semester:
 
 Summary: We set up a simple workflow for image preprocessing (bilateral filter) and segmentation followed by rectangle detection. It is evident that many trees are still being picked up by rectangle detection.
 
@@ -30,7 +30,7 @@ Next steps: Work on vegetation/road detection and masking, as well as postproces
 
 ----------------------------
 
-# Progress from summer 2014:
+# Progress from Summer 2014:
 
 Summary: We continued working on vegetation detection and were successful in turning vegetation pixels into background. Afterwards, we use color invariants to detect roads and turn road pixels into background. Finally, we bring the buildings into the foreground and perform rectangle detection. This workflow is successful at excluding vegetation from building detection, and right now detection is over-sensitive, which is what we were aiming for. 
 
